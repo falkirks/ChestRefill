@@ -1,0 +1,19 @@
+name: ChestRefill
+main: ChestRefill\ChestRefill
+version: 1.0
+author: Falk
+api: [1.0.0]
+load: POSTWORLD
+commands:
+ refill:
+  permission: chestrefill.capture
+  description: Add a new chest
+  usage: /refill
+permissions:
+ chestrefill:
+  default: op
+  description: Top level ChestRefill permission
+  children:
+   chestrefill.capture:
+    default: op
+    description: Add a new chest
