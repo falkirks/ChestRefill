@@ -1,8 +1,8 @@
 name: ChestRefill
-main: ChestRefill\ChestRefill
-version: 1.0
+main: falkirks\chestrefill\ChestRefill
+version: 2.0
 author: Falk
-api: [1.0.0]
+api: [1.11.0]
 load: POSTWORLD
 commands:
  refill:
@@ -14,6 +14,6 @@ permissions:
   default: op
   description: Top level ChestRefill permission
   children:
-   chestrefill.capture:
-    default: op
-    description: Add a new chest
+    chestrefill.command:
+      default: op
+      description: Use all ChesrRefill commands

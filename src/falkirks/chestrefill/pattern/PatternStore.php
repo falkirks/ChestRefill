@@ -27,6 +27,16 @@ class PatternStore{
             }
         }
     }
+    public function addClass($class){
+        try {
+            if(is_subclass_of($class, ChestPattern::class)){
+                $this->classes[$class::getName()] = [$class, $class::getParams()];
+            }
+        }
+        catch(\Exception $e){
+            //Class couldn't be found
+        }
+    }
     public function verifyPatternData($name, array $data){
         return PatternStore::compareArray($this->classes[$name][1], $data);
     }
@@ -41,7 +51,10 @@ class PatternStore{
         }
         return true;
     }
-    public function makePattern($name, ...$params){
+    public function getPattern($name){
+        return (isset($this->classes[$name]) ? $this->classes[$name][0] : null);
+    }
+    public function makePattern($name, array $params){
         if(!isset($this->classes[$name])) return false;
         $class = $this->classes[$name][0];
         return new $class(...$params);

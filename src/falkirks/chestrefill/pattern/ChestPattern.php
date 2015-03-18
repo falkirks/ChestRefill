@@ -2,6 +2,7 @@
 namespace falkirks\chestrefill\pattern;
 
 
+use pocketmine\command\CommandSender;
 use pocketmine\tile\Chest;
 
 abstract class ChestPattern {
@@ -19,6 +20,9 @@ abstract class ChestPattern {
      */
     public function getChestTile(){
         return $this->chestTile;
+    }
+    public static function startWizard(CommandSender $sender, array $args){
+        $sender->sendMessage("This pattern type doesn't have a creation wizard available.");
     }
     /**
      * @return array
