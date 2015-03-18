@@ -34,7 +34,7 @@ class ChestCommand extends Command implements PluginIdentifiableCommand{
                         if (isset($args[1])) {
                             $pattern = $this->main->getPatternStore()->getPattern($args[1]);
                             if ($pattern !== null) {
-                                $pattern::startWizard($sender, $args);
+                                $pattern::startWizard($sender, $args, $this->main);
                             } else {
                                 $sender->sendMessage("That pattern doesn't exist.");
                             }
