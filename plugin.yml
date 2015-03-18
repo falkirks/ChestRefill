@@ -1,7 +1,7 @@
 name: ChestRefill
-main: ChestRefill\ChestRefill
-version: 1.0.1
-author: Falk
+main: falkirks\chestrefill\ChestRefill
+version: 2.0
+author: Falkirks
 api: [1.11.0]
 load: POSTWORLD
 commands:
