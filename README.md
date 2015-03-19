@@ -30,6 +30,6 @@ The above pattern could be registered by using
 ```
 $this->getServer()->getPluginManager()->getPlugin("ChestRefill")->getPatternStore()->addClass(SetAllPattern::class);
 ```
-### `ChestDispatcher` (in progress)
+### `RefillDispatcher` (in progress)
 Chest dispatchers are what cause chests' to be refilled. A dispatcher can have multiple chests and a chest can have multiple dispatchers. 
 
