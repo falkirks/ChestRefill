@@ -11,7 +11,7 @@ Chest patterns define what happens when a chest is "refilled". They are loaded i
 
 #### Example
 Patterns must be declared in a certain structure.
-```
+```php
 /**
  * @pattern-name setALL
  * @pattern-params {"id": "", "meta": "", "amount": ""}
@@ -27,7 +27,7 @@ class SetAllPattern extends ChestPattern{
 ```
 
 The above pattern could be registered by using
-```
+```php
 $this->getServer()->getPluginManager()->getPlugin("ChestRefill")->getPatternStore()->addClass(SetAllPattern::class);
 ```
 ### `RefillDispatcher` (in progress)
