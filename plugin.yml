@@ -8,7 +8,7 @@ commands:
  refill:
   permission: chestrefill.capture
   description: Add a new chest
-  usage: /refill
+  usage: "[ChestRefill] That command is outdated and has been replaced with /chest, this message will be removed in a future version."
 permissions:
  chestrefill:
   default: op

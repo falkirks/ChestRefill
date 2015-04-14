@@ -49,6 +49,7 @@ class StandardDispatcher extends PluginTask implements RefillDispatcher{
     }
 
     public function cancel(){
+        $this->chests = [];
         $this->getOwner()->getServer()->getScheduler()->cancelTask($this->task->getTaskId());
     }
 }
