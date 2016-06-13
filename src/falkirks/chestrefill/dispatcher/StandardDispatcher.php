@@ -9,9 +9,11 @@ class StandardDispatcher extends PluginTask implements RefillDispatcher{
     protected $task;
     /** @var  Chest[] */
     protected $chests;
+    protected $args;
     public function __construct(ChestRefill $plugin, array $args){
         parent::__construct($plugin);
         $this->chests = [];
+        $this->args = $args;
         if(isset($args["delay"]) && isset($args["repeat"])){
             $this->task = $plugin->getServer()->getScheduler()->scheduleDelayedRepeatingTask($this, $args["delay"], $args["repeat"]);
         }
@@ -51,5 +53,11 @@ class StandardDispatcher extends PluginTask implements RefillDispatcher{
     public function cancel(){
         $this->chests = [];
         $this->getOwner()->getServer()->getScheduler()->cancelTask($this->task->getTaskId());
+    }
+    /**
+     * @return array
+     */
+    public function getArgs(){
+        return $this->args;
     }
 }

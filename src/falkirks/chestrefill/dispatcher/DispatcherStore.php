@@ -4,6 +4,7 @@ namespace falkirks\chestrefill\dispatcher;
 
 use falkirks\chestrefill\Chest;
 use falkirks\chestrefill\ChestRefill;
+use pocketmine\utils\Config;
 
 class DispatcherStore {
     /** @var  RefillDispatcher[] */
@@ -13,6 +14,7 @@ class DispatcherStore {
 
     public function __construct(ChestRefill $plugin){
         $this->plugin = $plugin;
+        $this->store = new Config($this->plugin->getDataFolder() . "dispatchers.yml", Config::YAML);
     }
     public function hasDispatcher($name){
         return isset($this->dispatchers[$name]);
@@ -50,5 +52,18 @@ class DispatcherStore {
         foreach($this->dispatchers as $dispatcher){
             $dispatcher->detach($chest);
         }
+    }
+    protected function serializeDispatcher(RefillDispatcher $refillDispatcher){
+        $args = $refillDispatcher->getArgs();
+        $args["type"] = get_class($refillDispatcher);
+        return $args;
+    }
+    protected function unserializeDispatcher($args){
+        if(isset($args["type"]) && class_exists($args["type"])){
+            $class = $args["type"];
+            unset($args["type"]);
+            return new $class($this->plugin, $args);
+        }
+        return false;
     }
 }

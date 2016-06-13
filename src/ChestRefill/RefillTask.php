@@ -1,6 +1,7 @@
 <?php
 namespace ChestRefill;
 
+use pocketmine\level\Level;
 use pocketmine\scheduler\PluginTask;
 use pocketmine\math\Vector3;
 use pocketmine\item\Item;

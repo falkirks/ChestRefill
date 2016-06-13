@@ -1,14 +1,14 @@
 name: ChestRefill
-main: falkirks\chestrefill\ChestRefill
-version: 2.0
+main: ChestRefill\ChestRefill
+version: 1.1
 author: Falkirks
-api: [1.11.0]
+api: [2.0.0]
 load: POSTWORLD
 commands:
  refill:
   permission: chestrefill.capture
   description: Add a new chest
-  usage: "[ChestRefill] That command is outdated and has been replaced with /chest, this message will be removed in a future version."
+  usage: "/refill"
 permissions:
  chestrefill:
   default: op
