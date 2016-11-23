@@ -12,6 +12,9 @@ class Chest {
     /** @var  Position */
     protected $position;
 
+    /** @var  String[] */
+    protected $dispatchers;
+
     public function __construct(Position $position){
         $this->position = $position;
     }
@@ -53,6 +56,30 @@ class Chest {
 
     public function apply(){
         return ($this->hasPattern() ? $this->pattern->apply() : false);
+    }
+
+    /**
+     * @return \String[]
+     */
+    public function getDispatchers(): array{
+        return $this->dispatchers;
+    }
+
+    public function usesDispatcher($name){
+        return in_array($name, $this->dispatchers);
+    }
+
+    public function addDispatcher($name){
+        if(!$this->usesDispatcher($name)){
+            $this->dispatchers[] = $name;
+        }
+    }
+
+    public function removeDispatcher($name){
+        if($this->usesDispatcher($name)){
+            $this->dispatchers = array_diff($this->dispatchers, [$name]);
+
+        }
     }
 
     /**

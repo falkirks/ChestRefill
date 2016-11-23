@@ -16,6 +16,16 @@ class DispatcherStore {
         $this->plugin = $plugin;
         $this->store = new Config($this->plugin->getDataFolder() . "dispatchers.yml", Config::YAML);
     }
+    public function load(){
+        foreach ($this->store->getAll() as $name => $dispatcher){
+            $this->addDispatcher($name, $this->unserializeDispatcher($dispatcher));
+        }
+    }
+    public function save(){
+        foreach ($this->dispatchers as $name => $dispatcher){
+            $this->store->set($name, $this->serializeDispatcher($dispatcher));
+        }
+    }
     public function hasDispatcher($name){
         return isset($this->dispatchers[$name]);
     }

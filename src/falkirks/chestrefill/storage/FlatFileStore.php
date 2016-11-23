@@ -35,7 +35,18 @@ class FlatFileStore implements ChestDataStore{
                     $pattern = $this->main->getPatternStore()->makePattern($chestData["patternName"], $chestData["patternArgs"]);
                     if($pattern instanceof ChestPattern){
                         $chest->setPattern($pattern);
-                        $this->chests[] = $chest;
+                        if(is_array($chestData["dispatchers"])) {
+                            foreach ($chestData["dispatchers"] as $d){
+                                if($this->main->getDispatcherStore()->hasDispatcher($d)){
+                                    $this->main->getDispatcherStore()->getDispatcher($d)->attach($chest);
+                                    $chest->addDispatcher($d);
+                                }
+                                else{
+                                    $this->main->getLogger()->warning("Failed to load attach a dispatcher: No dispatcher with that name.");
+                                }
+                            }
+                            $this->chests[] = $chest;
+                        }
                     }
                     else{
                         $this->main->getLogger()->warning("Failed to load a chest: Pattern data invalid.");
@@ -68,6 +79,7 @@ class FlatFileStore implements ChestDataStore{
                 "x" => $chest->getPosition()->x,
                 "y" => $chest->getPosition()->y,
                 "z" => $chest->getPosition()->z,
+                "dispatchers" => $chest->getDispatchers(),
                 "levelName" => $chest->getPosition()->getLevel()->getName(),
                 "patternName" => $pattern::getName(),
                 "patternArgs" => $pattern->getPatternData()
